@@ -1,0 +1,14 @@
+
+.header{
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    height:80px;
+width:100%;
+background-color:#ffff;
+float:right;
+padding:20px;
+}
+
+.sign-up1{
+    margin-right:40px;
+}
+

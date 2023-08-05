@@ -4,14 +4,13 @@ import * as Yup from "yup";
 import { useFormik, Form } from "formik";
 import React from "react";
 import { loginSchemas } from "../schemas/main";
-import { useState } from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { useState, useEffect } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import auth from "./firebase";
-// import { createUserWithEmailAndPassword } from "firebase/auth";
- import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-
+import Header from "./header";
 
 const initialValues = {
   email: "",
@@ -19,57 +18,52 @@ const initialValues = {
 };
 
 const LoginPage = () => {
- const navigate= useNavigate();
+  const navigate = useNavigate();
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [errorMsg, seterrMsg] = useState("");
+  const [getEmail, setGetEmail] = useState("");
 
+  useEffect(() => {
+    if (getEmail !== "") {
+      localStorage.setItem("Email", JSON.stringify(getEmail));
+      navigate("/tablecontent");
+    }
+  }, [getEmail, navigate]);
 
-  const {
-    values,
-    errors,
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    touched,
-    handleReset,
-  } = useFormik({
-    initialValues: initialValues,
+  const { values, errors, handleChange, handleBlur, handleSubmit, touched } =
+    useFormik({
+      initialValues: initialValues,
 
- validationSchema: loginSchemas,
+      validationSchema: loginSchemas,
 
-    onSubmit: (values) => {
-      signInWithEmailAndPassword(auth,values.email, values.password)
-      .then((userCredential) => {
-       
-        const user = userCredential.user;
-        navigate("/tablecontent");
-      
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        seterrMsg(errorMessage)
-      });
-    
-    
+      onSubmit: (values) => {
+        signInWithEmailAndPassword(auth, values.email, values.password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            const userEmail = user.email;
 
+            setGetEmail(userEmail);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            seterrMsg(errorMessage);
+          });
+      },
+    });
 
-    },
-    
-  });
-
- 
-const notify =()=>toast("pls fill your valid email and correct password & see my awesome website");
-
-
+  const notify = () =>
+    toast(
+      "pls fill your valid email and correct password & see my awesome website"
+    );
 
   return (
     <>
-    <ToastContainer/>
+      <ToastContainer />
       <div className="form-container">
-        <div className={`form-content ${isSubmitted ? 'custom-class' : ''}`}>
+        <div className={`form-content ${isSubmitted ? "custom-class" : ""}`}>
           <form onSubmit={handleSubmit}>
-          {/* <p onClick={notify} style={{textAlign:'center',color:'darkblue'}}>Click Me</p> */}
+            {/* <p onClick={notify} style={{textAlign:'center',color:'darkblue'}}>Click Me</p> */}
             <div className="mb-3">
               <label htmlFor="email" className="input-label">
                 Email
@@ -86,8 +80,12 @@ const notify =()=>toast("pls fill your valid email and correct password & see my
                 onBlur={handleBlur}
               />
               {touched.email && errors.email ? (
-                <h6 className="form-error  errors"  onClick={()=>setIsSubmitted(true)}>{errors.email}</h6>
-                
+                <h6
+                  className="form-error  errors"
+                  onClick={() => setIsSubmitted(true)}
+                >
+                  {errors.email}
+                </h6>
               ) : null}
             </div>
             <div className="mb-3">
@@ -106,16 +104,28 @@ const notify =()=>toast("pls fill your valid email and correct password & see my
                 onBlur={handleBlur}
               />
               {touched.password && errors.password ? (
-                <h6 className="form-error  errors"  onClick={()=>setIsSubmitted(true)}>{errors.password}</h6>
+                <h6
+                  className="form-error  errors"
+                  onClick={() => setIsSubmitted(true)}
+                >
+                  {errors.password}
+                </h6>
               ) : null}
             </div>
-            <button type="submit" className="continue" onClick={()=>setIsSubmitted(true)}>
-              {" "}  
-            Continue
+            <button
+              type="submit"
+              className="continue"
+              onClick={() => setIsSubmitted(true)}
+            >
+              {" "}
+              Continue
             </button>
-            
+
             <button className="signup">
-              <Link to="/signup" style={{ textDecoration: "none" ,color:'black'}}>
+              <Link
+                to="/signup"
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 signup
               </Link>
             </button>
@@ -126,7 +136,10 @@ const notify =()=>toast("pls fill your valid email and correct password & see my
                 className="fa-brands fa-twitter"
                 style={{ color: "white" }}
               ></i>{" "}
-              <Link to="https://twitter.com" style={{ textDecoration: "none" ,color:'black'}}>
+              <Link
+                to="https://twitter.com"
+                style={{ textDecoration: "none", color: "black" }}
+              >
                 Sign in with Twitter
               </Link>{" "}
             </button>
@@ -137,8 +150,8 @@ const notify =()=>toast("pls fill your valid email and correct password & see my
               </i>{" "}
               Sign in with Facebook
             </button>
-            {errorMsg?<p style={{color:"red"}}>{errorMsg}</p>:null}
-
+            {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
+            {/* <button  className="log-out">Log out</button> */}
           </form>
         </div>
       </div>

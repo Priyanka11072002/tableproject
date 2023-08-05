@@ -1,11 +1,21 @@
 import { useState,useEffect } from 'react'
 import ReactPaginate from 'react-paginate'
 import './tablecontent.css'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Header from "./header";
 
 function TableContent() {
   const [data,setData] = useState([])
   const [filterValue, setFilterValue] = useState([]);
+
+  const navigate = useNavigate();
+useEffect(()=>{
+
+  const token = localStorage.getItem("Email");
+  if (!token) {
+    navigate("/");
+  }
+},[])
  
   const pageLimit = 10
 
@@ -60,6 +70,8 @@ function TableContent() {
 
   return (
     <>
+        <Header  />
+
     <Link to="/"  style={{textDecoration:'none'}}>back to homepage</Link>
     <form className='form'>
       <input type='text' placeholder='Search here'  onChange={(e)=>handleFilter(e.target.value)}/>
@@ -84,7 +96,7 @@ function TableContent() {
                 <td><img src={items.url} width='198px' height='100'/></td>
                 <td><img src="spinner.png" width='65px' height='60px' style={{margin:'-9px'}}/></td>
               </tr>
-              )): <div>No Data Found</div>}
+              )): <tr><td>No Data Found</td></tr>}
           </tbody>
           </table>
       </div>

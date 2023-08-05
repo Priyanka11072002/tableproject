@@ -16,14 +16,14 @@
    border-radius:20px;
    padding:30px;
    width:350px;
-   height: 560px;
+   height:560;
 
 }
 .custom-class{
-  height: 600px;
+  height: 620px;
 
 }
-form .continue,.twitter,.facebook,.emailId,.password,.signup{
+form .continue,.twitter,.facebook,.emailId,.password,.signup,.log-out{
    margin: auto;
    background-color: hsl(0, 0%, 90%);
    transition: background-color 300ms;
@@ -35,6 +35,9 @@ form .continue,.twitter,.facebook,.emailId,.password,.signup{
   width: 100%;
   margin-bottom:20px;
  }
+.log-out{
+  background-color: #a23edd;
+}
  .twitter{
    background-color:rgb(4, 179, 249);
  }
@@ -65,7 +68,7 @@ form .continue,.twitter,.facebook,.emailId,.password,.signup{
  }
 
  .errors{
-  padding-top:10px;
+padding-top:20px;
   color: red;
 
 }

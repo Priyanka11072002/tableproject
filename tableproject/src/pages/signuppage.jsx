@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 
 import { signupSchemas } from "../schemas/yupForsignup";
 import "./signup.css";
@@ -30,7 +29,7 @@ const SignupPage = () => {
   } = useFormik({
     initialValues: initialValues,
     validationSchema: signupSchemas,
-    onSubmit: (values, action) => {
+    onSubmit: (values) => {
       createUserWithEmailAndPassword(
         auth,
         values.email,
@@ -55,13 +54,7 @@ const SignupPage = () => {
         <div className={`col-md-5 ${isSubmitted ? "custom-class" : ""}`}>
           <h1 className="my-4 font-weight-bold .display-4">Sign up</h1>
           <form onSubmit={handleSubmit}>
-            {/* <div className='mb-3'>
-<label htmlFor="name" className="form-label">Name</label>
-<input type='text' placeholder='Name'  name='name'  autoComplete='off' id='name'   className="form-control" 
- value={values.name}  onChange={handleChange} onBlur={handleBlur}/>
-</div>
-{touched.name && errors.name ? <div className="form-error">{errors.name}</div>:null} */}
-
+   
             <div className="mb-3">
               <label htmlFor="email" className="input-label">
                 Email
