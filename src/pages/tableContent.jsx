@@ -2,7 +2,7 @@ import { useState,useEffect } from 'react'
 import ReactPaginate from 'react-paginate'
 import './tablecontent.css'
 import { Link, useNavigate } from 'react-router-dom';
-import Header from "./header";
+import Header from "./Header";
 
 function TableContent() {
   const [data,setData] = useState([])
