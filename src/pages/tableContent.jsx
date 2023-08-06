@@ -30,7 +30,6 @@ useEffect(()=>{
         alert("failed to fetch api")
       }
     }catch(error){
-      console.log(error)
     }
     }
     fetchData()

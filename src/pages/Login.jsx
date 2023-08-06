@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 import "./Loginpage.css";
-import * as Yup from "yup";
-import { useFormik, Form } from "formik";
+import { useFormik} from "formik";
 import React from "react";
 import { loginSchemas } from "../schemas/main";
 import { useState, useEffect } from "react";
-import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import auth from "./firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import Header from "./header";
 
 const initialValues = {
   email: "",
@@ -59,11 +56,9 @@ const LoginPage = () => {
 
   return (
     <>
-      <ToastContainer />
       <div className="form-container">
         <div className={`form-content ${isSubmitted ? "custom-class" : ""}`}>
           <form onSubmit={handleSubmit}>
-            {/* <p onClick={notify} style={{textAlign:'center',color:'darkblue'}}>Click Me</p> */}
             <div className="mb-3">
               <label htmlFor="email" className="input-label">
                 Email
@@ -151,7 +146,6 @@ const LoginPage = () => {
               Sign in with Facebook
             </button>
             {errorMsg ? <p style={{ color: "red" }}>{errorMsg}</p> : null}
-            {/* <button  className="log-out">Log out</button> */}
           </form>
         </div>
       </div>
