@@ -1,12 +1,15 @@
-import { useState,useEffect } from 'react'
+import { useState,useEffect ,useContext} from 'react'
 import ReactPaginate from 'react-paginate'
 import './tablecontent.css'
 import { Link, useNavigate } from 'react-router-dom';
 import Header from "./Header";
+import Store from './context';
 
 function TableContent() {
   const [data,setData] = useState([])
   const [filterValue, setFilterValue] = useState([]);
+  const {toggle1,handleToggle1} = useContext(Store)
+  console.log(toggle1,'toggle1')
 
   
   const navigate = useNavigate();
@@ -70,16 +73,17 @@ useEffect(()=>{
 
   return (
     <>
-        <Header  />
+       <Header  />
 
-    <Link to="/"  style={{textDecoration:'none'}}>back to homepage</Link>
-    <form className='form'>
+    {/* <Link to="/"  style={{textDecoration:'none'}}>back to homepage</Link> */}
+ 
+    <form className={`form ${toggle1?'form1':''}`}>
       <input type='text' placeholder='Search here'  onChange={(e)=>handleFilter(e.target.value)}/>
       <button type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
     </form>
-    <div className="container"> 
+    <div className={`container ${toggle1?'container1':''}`}> 
       <div className="col-md-12">  
-          <table className="col-md-12">
+          <table className={`col-md-12 ${toggle1?'table-content':''}`}>
             <thead>
               <tr>
                 <th><input type="checkbox" className='checkbox'/>Id</th>
@@ -93,7 +97,7 @@ useEffect(()=>{
               <tr key={index}>
                 <td><input type="checkbox" className='checkbox'/>{items.id}</td>
                 <td>{items.title}</td>
-                <td><img src={items.url} width='198px' height='100'/></td>
+                <td><img src={items.url} className='image'/></td>
                 <td><img src="spinner.png" width='65px' height='60px' style={{margin:'-9px'}}/></td>
               </tr>
               )): <tr><td>No Data Found</td></tr>}

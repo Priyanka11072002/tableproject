@@ -47,6 +47,8 @@ form .continue,.twitter,.facebook,.emailId,.password,.signup,.log-out{
  }
  .facebook{
    background-color:rgb(47, 29, 249);
+   color:white;
+
  }
  .facebook:hover{
    background-color:rgb(41, 34, 114);
@@ -54,6 +56,7 @@ form .continue,.twitter,.facebook,.emailId,.password,.signup,.log-out{
  }
  .continue{
    background-color:rgb(249, 72, 72) !important;  border-bottom:1px solid gray;
+   color:white;
 
  }
  .continue:hover{

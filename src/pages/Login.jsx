@@ -119,7 +119,7 @@ const LoginPage = () => {
             <button className="signup">
               <Link
                 to="/signup"
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "blue" }}
               >
                 signup
               </Link>
@@ -129,18 +129,18 @@ const LoginPage = () => {
               {" "}
               <i
                 className="fa-brands fa-twitter"
-                style={{ color: "white" }}
+                style={{paddingRight:'5px',color:'white' }}
               ></i>{" "}
               <Link
                 to="https://twitter.com"
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "white" }}
               >
                 Sign in with Twitter
               </Link>{" "}
             </button>
             <button className="facebook">
               {" "}
-              <i className="fa-brands fa-facebook" style={{ color: "black" }}>
+              <i className="fa-brands fa-facebook" style={{ color: "white",paddingRight:'5px' }}>
                 {" "}
               </i>{" "}
               Sign in with Facebook
