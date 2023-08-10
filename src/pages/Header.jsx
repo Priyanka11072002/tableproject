@@ -1,59 +1,47 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import "./header.css";
 import auth from "./firebase";
 import { signOut } from "firebase/auth";
 import Sidebar from "./sidebar";
 import Store from "./context";
-import Sidebar2 from "./sidebar2";
-
+import { Link } from "react-router-dom";
 
 const Header = () => {
-    const userEmail = JSON.parse(localStorage.getItem('Email'))
- const [getEmail,setGetEmail] = useState(userEmail)
-const [bars,setBars] = useState(false);
+  const userEmail = JSON.parse(localStorage.getItem("Email"));
+  const [getEmail, setGetEmail] = useState(userEmail);
+  const {toggle1} = useContext(Store)
 
-useEffect(()=>{
-  console.log(bars,'bars')
-},[bars])
- useEffect(()=>{
- },[getEmail,bars])
+  useEffect(() => {}, [getEmail]);
   const handleLogOut = () => {
     signOut(auth)
       .then(() => {
         setGetEmail("");
         localStorage.removeItem("Email");
         window.location.reload();
-
       })
-      .catch((error) => {
-      });
+      .catch((error) => {});
   };
-
 
   return (
     <>
-
-   <Sidebar/>
-   <i className='fa-solid fa-bars' onClick={()=>setBars(prev=>!prev)} ></i>
-   {bars?<Sidebar2/>:''}
-
-          <div className="col-md-12 text-end header" >
+      <Sidebar />
+     
+     
+      <header className="highlight_header">
+            <Link to="/" className={`backtoHomepage ${toggle1?'backtoHomepage1':''}`}>
+              back to homepage
+            </Link>
 
             <form onSubmit={handleLogOut}>
-           {getEmail&&<span style={{paddingRight:'20px',color:'blue'}}>{getEmail}</span>}
+              {getEmail && <span className={`getEmail ${toggle1?'getEmail2':''}`}>{getEmail}</span>}
 
-            <button
-              type="submit"
-              className="btn btn-outline-primary me-2 "
-      
-            >
-              Log-out
-            </button>
+              <button type="submit" className={`sign-out1 ${toggle1?'sign-out3':''}`}>
+                Log-out
+              </button>
             </form>
-          </div>
-<br/>
-<br/>
-
+      </header>
+      <br />
+      <br />
     </>
   );
 };

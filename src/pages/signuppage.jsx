@@ -50,7 +50,7 @@ const SignupPage = () => {
 
   return (
     <>
-      <div className="form_container ">
+      <div className="form_container_bootstrap ">
         <div className={`col-md-5 ${isSubmitted ? "custom-class" : ""}`}>
           <h1 className="my-4 font-weight-bold .display-4">Sign up</h1>
           <form onSubmit={handleSubmit}>

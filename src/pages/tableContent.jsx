@@ -9,7 +9,6 @@ function TableContent() {
   const [data,setData] = useState([])
   const [filterValue, setFilterValue] = useState([]);
   const {toggle1,handleToggle1} = useContext(Store)
-  console.log(toggle1,'toggle1')
 
   
   const navigate = useNavigate();
@@ -77,16 +76,15 @@ useEffect(()=>{
 
     {/* <Link to="/"  style={{textDecoration:'none'}}>back to homepage</Link> */}
  
-    <form className={`form ${toggle1?'form1':''}`}>
-      <input type='text' placeholder='Search here'  onChange={(e)=>handleFilter(e.target.value)}/>
-      <button type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
+    <form >
+      <input type='text' placeholder='Search here'  onChange={(e)=>handleFilter(e.target.value)} className={`searchHere ${toggle1?'searchHere1':''}`}/>
     </form>
     <div className={`container ${toggle1?'container1':''}`}> 
       <div className="col-md-12">  
           <table className={`col-md-12 ${toggle1?'table-content':''}`}>
             <thead>
               <tr>
-                <th><input type="checkbox" className='checkbox'/>Id</th>
+                <th><input type="checkbox" className='checkbox_id'/>Id</th>
                 <th>Title</th>
                 <th>Image</th>
                 <th>Edit</th>
@@ -95,7 +93,7 @@ useEffect(()=>{
           <tbody>
             {filterValue.length > 0 ? filterValue.map((items,index)=>(
               <tr key={index}>
-                <td><input type="checkbox" className='checkbox'/>{items.id}</td>
+                <td><input type="checkbox" className='checkbox_id'/>{items.id}</td>
                 <td>{items.title}</td>
                 <td><img src={items.url} className='image'/></td>
                 <td><img src="spinner.png" width='65px' height='60px' style={{margin:'-9px'}}/></td>
