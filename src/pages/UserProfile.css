@@ -79,15 +79,25 @@ input,select{
     }
     .profile-sub-container{
         width:100%;
-    
+        margin-left: 20px;
+
     }
     .image_width{
         width: 80px;
         height:80px;
         margin-left:150px;
-        
-        
-        
         }
-    
+        .users{
+            margin-bottom: 10px;
+            width: 70% !important;
+            
+            }
+           
+            .profile-content{
+                width:80%
+            }
+            .btn-primary{
+                width:50%;
+ 
+            }
 }
